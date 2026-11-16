@@ -464,6 +464,34 @@ html{scroll-behavior:smooth}
 <div style="display: flex; flex-direction: column; padding: 40px 0 0">
 <h3 style="margin: 0 0 4px; padding-bottom: 12px; border-bottom: 1px solid #f2a93b; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 15px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #f2a93b">November 2026</h3>
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #2a3136;">
+<div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #9aa4ab; padding-top: 3px">Troubleshooting</div>
+<div style="flex: 1 1 340px; min-width: 0">
+<h4 style="margin: 0; font-size: 19px; font-weight: 600">Cleared a stuck service profile association after a blade migration</h4>
+<dl style="margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Situation</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">During a weekly migration, I moved a Cisco UCS blade from the old domain into a new Fabric Interconnect domain and let discovery run to 100%.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Problem</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">I assigned its service profile from UCS Central, but it would not take. UCS Manager still showed the server as unassociated, and UCS Central had the profile stuck in Pending Reassociation.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Action</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">I re-acknowledged the server in UCS Manager, which sent it through discovery again.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Result</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">As soon as the second discovery reached 100%, the service profile associated with the blade. No other changes were needed.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Why it worked</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">Re-acknowledging makes UCS Manager rebuild its record of the blade from scratch. After a move between domains, that record can be left half-updated, so the association from UCS Central has nothing valid to attach to. A clean inventory lets the pending association go through.</dd>
+</div>
+</dl>
+</div>
+</article>
+<article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #2a3136;">
 <div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #9aa4ab; padding-top: 3px">Home lab</div>
 <div style="flex: 1 1 340px; min-width: 0">
 <h4 style="margin: 0; font-size: 19px; font-weight: 600">Built and deployed this site on my own domain</h4>
@@ -631,8 +659,8 @@ html{scroll-behavior:smooth}
 </div>
 <h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em">Security+</h3>
 <p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #e6e8ea">SY0-701 · Earned Sep 2024 · Valid to Sep 2027</p>
-<a href="https://www.credly.com/badges/156e7222-2c87-4847-bb11-844d8071cb9d" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; padding: 10px 0 0; align-self: flex-start" aria-label="Verify CompTIA Security+ on Credly">Verify on Credly</a>
-<p style="margin: 0; font-size: 15px; color: #c3cad0">Meets the DoD 8570 baseline. Covers threats and vulnerabilities, security architecture, security operations, and governance and risk.</p>
+<p style="margin: 0; font-size: 15px; color: #c3cad0">Meets the DoD 8140 baseline (formerly 8570). Covers threats and vulnerabilities, security architecture, security operations, and governance and risk.</p>
+<a href="https://www.credly.com/badges/156e7222-2c87-4847-bb11-844d8071cb9d" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; padding: 6px 0 0; align-self: flex-start; margin-top: auto" aria-label="Verify CompTIA Security+ on Credly">Verify on Credly</a>
 </article>
 <article style="border: 1px solid #f2a93b; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center">
@@ -641,8 +669,8 @@ html{scroll-behavior:smooth}
 </div>
 <h3 style="margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em">CCNA</h3>
 <p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #e6e8ea">200-301 · Earned Jan 2026 · Valid to Jan 2029</p>
-<a href="https://www.credly.com/badges/f8776e43-b2c8-4fac-a35a-bcb730b155f0/public_url" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; padding: 10px 0 0; align-self: flex-start" aria-label="Verify Cisco CCNA on Credly">Verify on Credly</a>
 <p style="margin: 0; font-size: 15px; color: #c3cad0">Covers network fundamentals, network access, IP connectivity, IP services, security fundamentals and automation.</p>
+<a href="https://www.credly.com/badges/f8776e43-b2c8-4fac-a35a-bcb730b155f0/public_url" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; padding: 6px 0 0; align-self: flex-start; margin-top: auto" aria-label="Verify Cisco CCNA on Credly">Verify on Credly</a>
 </article>
 <article style="border: 1px solid #3a434a; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center">
