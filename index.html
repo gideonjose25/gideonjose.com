@@ -499,6 +499,38 @@ html{scroll-behavior:smooth}
 </div>
 </article>
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #2a3136;">
+<div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #9aa4ab; padding-top: 3px">Migration</div>
+<div style="flex: 1 1 340px; min-width: 0">
+<h4 style="margin: 0; font-size: 19px; font-weight: 600">Moved service profiles across UCS domains with their identities intact</h4>
+<dl style="margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Situation</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">Moving Cisco UCS blades from an old domain into a new Fabric Interconnect domain during a weekend change window.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Problem</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">After a moved blade finished discovery, its service profile reported the server as unavailable. The profile was local to the old domain, and a local profile can only associate with blades in its own domain. A second server hit a resource ownership conflict when its global profile tried to claim a blade in the new domain.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Action</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">I ran a globalization evaluation in UCS Central to carry the first profile's identities (UUID, MACs, WWPNs) across domains. It found one blocker: the management IP came from a pool whose address block did not match the global pool. With the window closing, I disassociated rather than deleted anything, returned both servers to their original domains, confirmed they were healthy and escalated the resource conflict. In a later window I resolved the pool conflict, globalized the profile and migrated the first blade to the new domain.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Result</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">Both servers stayed in a known-good state throughout, with no identity changes. The first blade now runs in the new domain with its original UUID, MACs and WWPNs.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Open item</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">The second blade still reports a resource conflict. My working theory is that its firmware is below what the new fabric interconnects require, and I am checking that before the next attempt.</dd>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 2px 16px">
+<dt style="flex: 0 0 110px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #f2a93b; padding-top: 3px">Lesson</dt>
+<dd style="margin: 0; flex: 1 1 260px; min-width: 0; color: #c3cad0">A local profile is tied to one domain. Moving a blade across domains means globalizing its profile first, with the management IP pool mapped to the new domain's subnet.</dd>
+</div>
+</dl>
+</div>
+</article>
+<article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #2a3136;">
 <div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #9aa4ab; padding-top: 3px">Troubleshooting</div>
 <div style="flex: 1 1 340px; min-width: 0">
 <h4 style="margin: 0; font-size: 19px; font-weight: 600">Traced an unreachable management interface to a duplicate IP</h4>
@@ -709,7 +741,7 @@ html{scroll-behavior:smooth}
 <div id="gj-term" style="margin-top: 18px; border: 1px solid #3a434a; background: #0b0d0f; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; line-height: 1.7">
 <div style="display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #2a3136; color: #9aa4ab; font-size: 12px">
 <span aria-hidden="true" style="width: 9px; height: 9px; border-radius: 50%; background: #5cc8a8; display: inline-block"></span>
-<span>guest@gideonjose.com · try a command</span>
+<span>guest@gideonjose · try a command</span>
 </div>
 <div id="gj-term-out" role="log" aria-live="polite" style="padding: 14px 16px 6px; min-height: 150px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; color: #c3cad0">
 <div style="color: #9aa4ab">Type help, or tap a command below.</div>
@@ -749,7 +781,7 @@ html{scroll-behavior:smooth}
 <div style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 56px; display: flex; flex-direction: column; gap: 22px">
 <h2 style="margin: 0; font-size: clamp(30px, 5vw, 48px); line-height: 1.1; font-weight: 600; letter-spacing: -0.01em; max-width: 760px">Building out an infrastructure, network or security team? I would like to hear about it.</h2>
 <div style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center">
-<a href="mailto:gideon@gideonjose.com" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 26px; background: #f2a93b; color: #14171a; font-weight: 600; text-decoration: none; border-radius: 3px">gideon@gideonjose.com</a>
+<a id="gj-mail" href="#contact" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 26px; background: #f2a93b; color: #14171a; font-weight: 600; text-decoration: none; border-radius: 3px">contact [at] gideonjose [dot] com</a>
 <button type="button" id="gj-copy" style="min-height: 48px; padding: 0 20px; background: transparent; border: 1px solid #3a434a; color: #e6e8ea; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; cursor: pointer; border-radius: 3px">Copy email</button>
 <a href="https://gideonjose25.github.io/cybersecurity-homelab" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 15px; padding: 12px 0">Home lab on GitHub</a>
 </div>
@@ -772,6 +804,9 @@ html{scroll-behavior:smooth}
 </script>
 <script>
 (function () {
+  var EMAIL = ['contact', 'gideonjose.com'].join(String.fromCharCode(64));
+  var mail = document.getElementById('gj-mail');
+  if (mail) { mail.href = 'mailto:' + EMAIL; mail.textContent = EMAIL; }
   var out = document.getElementById('gj-term-out');
   var form = document.getElementById('gj-term-form');
   var input = document.getElementById('gj-term-in');
@@ -804,7 +839,7 @@ html{scroll-behavior:smooth}
         for (var i = 0; i < items.length && i < 3; i++) lines.push('- ' + items[i].textContent.trim());
         return 'Latest entries:\n' + lines.join('\n') + '\nFull log: scroll to Work log.';
       },
-      contact: function () { return 'gideon@gideonjose.com'; },
+      contact: function () { return EMAIL; },
       sudo: function () { return 'Permission denied. Nice try, though.'; }
     };
     function run(raw) {
@@ -828,8 +863,8 @@ html{scroll-behavior:smooth}
     copy.addEventListener('click', function () {
       var done = function () { copy.textContent = 'Copied'; setTimeout(function () { copy.textContent = 'Copy email'; }, 2000); };
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText('gideon@gideonjose.com').then(done, function () { copy.textContent = 'gideon@gideonjose.com'; });
-      } else { copy.textContent = 'gideon@gideonjose.com'; }
+        navigator.clipboard.writeText(EMAIL).then(done, function () { copy.textContent = EMAIL; });
+      } else { copy.textContent = EMAIL; }
     });
   }
 })();
