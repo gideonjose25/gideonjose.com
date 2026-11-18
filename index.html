@@ -27,7 +27,17 @@ html{scroll-behavior:smooth}
 .gj-slide{animation:gj-slide 5s ease-in-out infinite alternate}
 @keyframes gj-pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .gj-pulse{animation:gj-pulse 2s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.gj-led,.gj-flow,.gj-slide,.gj-pulse{animation:none}}
+.gj-hero{position:relative;overflow:hidden}
+.gj-hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(108,182,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(108,182,255,.08) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 75% 85% at 72% 38%,#000 25%,transparent 72%);mask-image:radial-gradient(ellipse 75% 85% at 72% 38%,#000 25%,transparent 72%);pointer-events:none}
+.gj-hero::after{content:"";position:absolute;width:620px;height:620px;right:-120px;top:-40px;background:radial-gradient(circle,rgba(247,184,75,.13),rgba(108,182,255,.06) 45%,transparent 68%);pointer-events:none}
+.gj-hero>div{position:relative;z-index:1}
+@media (max-width:560px){#gj-typebox{min-height:50px;align-items:flex-start}}
+@keyframes gj-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.gj-in{animation:gj-up .8s cubic-bezier(.2,.7,.2,1) both}
+.gj-d1{animation-delay:.12s}.gj-d2{animation-delay:.28s}.gj-d3{animation-delay:.44s}.gj-d4{animation-delay:.6s}.gj-d5{animation-delay:.78s}
+@keyframes gj-caret{0%,49%{opacity:1}50%,100%{opacity:0}}
+.gj-caret{display:inline-block;width:9px;height:1.15em;margin-left:3px;background:#f7b84b;vertical-align:-3px;animation:gj-caret 1s infinite}
+@media (prefers-reduced-motion:reduce){.gj-led,.gj-flow,.gj-slide,.gj-pulse,.gj-in,.gj-caret{animation:none}}
 </style>
 <style>img{max-width:100%}</style>
 </head>
@@ -60,19 +70,23 @@ html{scroll-behavior:smooth}
 </div>
 </header>
 
-<section style="border-bottom: 1px solid #1f3550">
+<section class="gj-hero" style="border-bottom: 1px solid #1f3550">
 <div style="max-width: 1120px; margin: 0 auto; padding: 64px 24px 72px; display: flex; flex-wrap: wrap; gap: 40px 56px; align-items: center">
 <div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #f7b84b">Data Center Technician · Lynchburg, Virginia</p>
-<h1 style="margin: 0; font-size: clamp(36px, 5vw, 58px); line-height: 1.06; font-weight: 600; letter-spacing: -0.02em; max-width: 900px; text-wrap: balance">Gideon Jose runs production data center infrastructure and is finishing a degree in Data Networking and Security.</h1>
-<p style="margin: 0; max-width: 680px; font-size: 20px; color: #c6d5e4">I graduate from Liberty University in spring 2028 with a B.S. in Information Technology. My work spans servers, networks and security: I build, migrate, address and protect production systems, and I log every task and every lab. This site is that record.</p>
-<ul aria-label="Focus areas" style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px"><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Cybersecurity</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Information Security</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Infrastructure Operations</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Networking</li></ul>
-<div style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; margin-top: 8px">
+<p class="gj-in" style="margin: 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: #f7b84b">Gideon Jose · Data Center Technician · Lynchburg, Virginia</p>
+<h1 class="gj-in gj-d1" style="margin: 0; font-size: clamp(42px, 6.4vw, 76px); line-height: 1.02; font-weight: 600; letter-spacing: -0.03em; max-width: 760px; text-wrap: balance">I keep production infrastructure <span style="color: #f7b84b">running.</span></h1>
+<div id="gj-typebox" class="gj-in gj-d2" style="display: flex; gap: 10px; align-items: center; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 15px; color: #c6d5e4; padding: 12px 16px; border: 1px solid #1f3550; background: rgba(7,17,31,.6); max-width: 620px; min-height: 26px">
+<span aria-hidden="true" style="color: #3ddc97">$</span>
+<span><span id="gj-type">migrated chassis, blades and rack servers to a new FI domain</span><span class="gj-caret" aria-hidden="true"></span></span>
+</div>
+<p class="gj-in gj-d3" style="margin: 0; max-width: 640px; font-size: 19px; color: #c6d5e4">Servers, networks and security across three data centers in Virginia and South Carolina, while I finish a B.S. in Information Technology, Data Networking and Security, at Liberty University (spring 2028). I log every task and every lab. This site is that record.</p>
+<ul class="gj-in gj-d4" aria-label="Focus areas" style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px"><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Cybersecurity</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Information Security</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Infrastructure Operations</li><li style="border: 1px solid #2b4767; padding: 6px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #eef4fa">Networking</li></ul>
+<div class="gj-in gj-d4" style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: center; margin-top: 8px">
 <a href="#contact" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 26px; background: #f7b84b; color: #0b1a2e; font-weight: 600; text-decoration: none; border-radius: 3px">Contact me</a>
 <a href="#log" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 15px; padding: 12px 0">Read the work log</a>
 </div>
 </div>
-<div style="flex: 0 1 340px; min-width: 0; margin: 0 auto; color: #f7b84b">
+<div class="gj-in gj-d2" style="flex: 0 1 340px; min-width: 0; margin: 0 auto; color: #f7b84b">
 <svg viewBox="0 0 360 560" role="img" aria-label="An equipment rack holding a patch panel, two switches, a router, a firewall, a blade chassis, three rack servers and storage, with status lights blinking" style="width: 100%; height: auto; display: block">
 <defs>
 <pattern id="gj-port" width="12" height="10" patternUnits="userSpaceOnUse"><rect x="1.5" y="1.5" width="9" height="7" fill="#07111f" stroke="#2b4767"></rect></pattern>
@@ -170,24 +184,24 @@ html{scroll-behavior:smooth}
 </g>
 </svg>
 </div>
-<div style="flex: 1 1 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 0; border: 1px solid #1f3550">
+<div class="gj-in gj-d5" style="flex: 1 1 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 0; border: 1px solid #1f3550">
 <div style="padding: 22px 22px 24px; border-right: 1px solid #1f3550; border-bottom: 1px solid #1f3550; margin: 0 -1px -1px 0">
-<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b">700+</div>
+<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b" data-count="700" data-suffix="+">700+</div>
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #eef4fa; margin-top: 12px">Hardware units retired</div>
 <div style="font-size: 15px; color: #93a9c1; margin-top: 4px">FEX, chassis, blades, switches, access points, storage and racks</div>
 </div>
 <div style="padding: 22px 22px 24px; border-right: 1px solid #1f3550; border-bottom: 1px solid #1f3550; margin: 0 -1px -1px 0">
-<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b">100+</div>
+<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b" data-count="100" data-suffix="+">100+</div>
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #eef4fa; margin-top: 12px">Blades migrated</div>
-<div style="font-size: 15px; color: #93a9c1; margin-top: 4px">From the old UCS domain to a new Fabric Interconnect domain</div>
+<div style="font-size: 15px; color: #93a9c1; margin-top: 4px">Plus their chassis and rack servers, moved to a new Fabric Interconnect domain</div>
 </div>
 <div style="padding: 22px 22px 24px; border-right: 1px solid #1f3550; border-bottom: 1px solid #1f3550; margin: 0 -1px -1px 0">
-<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b">3</div>
+<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b" data-count="3" data-suffix="">3</div>
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #eef4fa; margin-top: 12px">Data center sites</div>
 <div style="font-size: 15px; color: #93a9c1; margin-top: 4px">Across Virginia and South Carolina</div>
 </div>
 <div style="padding: 22px 22px 24px; border-right: 1px solid #1f3550; border-bottom: 1px solid #1f3550; margin: 0 -1px -1px 0">
-<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b">30</div>
+<div style="font-size: 44px; line-height: 1; font-weight: 600; letter-spacing: -0.02em; color: #f7b84b" data-count="30" data-suffix="+">30+</div>
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #eef4fa; margin-top: 12px">Servers in one delivery</div>
 <div style="font-size: 15px; color: #93a9c1; margin-top: 4px">Racked and installed on-site</div>
 </div>
@@ -220,7 +234,7 @@ html{scroll-behavior:smooth}
 <div style="flex: 1 1 320px; min-width: 0">
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #93a9c1">Step 01 · Rack mount</div>
 <h3 style="margin: 6px 0 10px; font-size: 28px; font-weight: 600">It arrives</h3>
-<p style="margin: 0; color: #c6d5e4">A new server comes off the pallet. I fit the rails, seat it in the rack and check it against the build sheet before anything gets power. On one delivery that meant 30 servers at a single site.</p>
+<p style="margin: 0; color: #c6d5e4">A new server comes off the pallet. I fit the rails, seat it in the rack and check it against the build sheet before anything gets power. On one delivery that meant more than 30 servers at a single site.</p>
 </div>
 </div>
 
@@ -296,7 +310,7 @@ html{scroll-behavior:smooth}
 <div style="flex: 1 1 320px; min-width: 0">
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #93a9c1">Step 04 · Blade and rack servers</div>
 <h3 style="margin: 6px 0 10px; font-size: 28px; font-weight: 600">It gets an identity</h3>
-<p style="margin: 0; color: #c6d5e4">Each week I migrate Cisco UCS blades from the old domain to a new Fabric Interconnect domain, and I move local service profiles to global in UCS Central. On Lenovo I set up the management controller. When a blade faults, I find the bad part and replace it.</p>
+<p style="margin: 0; color: #c6d5e4">Each week I migrate Cisco UCS chassis, blades and rack servers from the old domain to a new Fabric Interconnect domain, and I move local service profiles to global in UCS Central. On Lenovo I set up the management controller. When a blade faults, I find the bad part and replace it.</p>
 </div>
 </div>
 
@@ -318,7 +332,7 @@ html{scroll-behavior:smooth}
 <div style="flex: 1 1 320px; min-width: 0">
 <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #93a9c1">Step 05 · Security</div>
 <h3 style="margin: 6px 0 10px; font-size: 28px; font-weight: 600">It gets protected</h3>
-<p style="margin: 0; color: #c6d5e4">I turn on drive encryption across the server fleet and work in an environment fronted by Palo Alto firewalls and F5 load balancers. In the lab I take a vulnerability scan from finding to verified patch.</p>
+<p style="margin: 0; color: #c6d5e4">I turn on drive encryption across the server fleet and work in an environment protected by enterprise firewalls and load balancers. In the lab I take a vulnerability scan from finding to verified patch.</p>
 </div>
 </div>
 
@@ -403,14 +417,14 @@ html{scroll-behavior:smooth}
 <h3 style="margin: 0; font-size: 21px; font-weight: 600">Data Center Technician</h3>
 <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #93a9c1">Apr 2026 to present</span>
 </div>
-<p style="margin: 4px 0 14px; color: #f7b84b; font-size: 16px">Genworth Financial, Lynchburg, VA (contract through Randstad)</p>
+<p style="margin: 4px 0 14px; color: #f7b84b; font-size: 16px">Genworth Financial, Lynchburg, VA</p>
 <ul style="margin: 0; padding-left: 20px; color: #c6d5e4; display: flex; flex-direction: column; gap: 8px">
-<li>Install, cable and bring online Cisco UCS and Lenovo ThinkSystem servers across three data center sites in Virginia and South Carolina, including a 30-server delivery.</li>
+<li>Install, cable and bring online Cisco UCS and Lenovo ThinkSystem servers across three data center sites in Virginia and South Carolina, including a single delivery of more than 30 servers.</li>
 <li>Troubleshoot hardware faults on UCS blades and rack servers: DIMM replacements, RAID controller and drive migrations, POST and fault LED issues.</li>
-<li>Migrated more than 100 Cisco UCS blades from the old domain to a new Fabric Interconnect domain, in weekly batches.</li>
+<li>Migrated more than 100 Cisco UCS blades, along with their chassis and rack servers, from the old domain to a new Fabric Interconnect domain, in weekly batches.</li>
 <li>Manage service profiles in Cisco UCS Central, including moving local profiles to global.</li>
 <li>Reserve management IPs in Infoblox IPAM and locate free switch ports with AKiPS for new builds.</li>
-<li>Build Lenovo SR650 V4 servers as additional domain controllers and roll out XClarity drive encryption across the Lenovo fleet.</li>
+<li>Build Lenovo SR650 V4 servers as additional domain controllers, part of a rollout of six across three data centers, four of them assigned to me (two on-site and two remotely), and roll out XClarity drive encryption across the Lenovo fleet.</li>
 <li>Retired more than 700 end-of-life hardware units: FEX, chassis, M4 blades, access points, switches, rack servers, network appliances, racks and storage.</li>
 </ul>
 </article>
@@ -457,8 +471,8 @@ html{scroll-behavior:smooth}
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0;">
 <div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #93a9c1; padding-top: 3px">Migration</div>
 <div style="flex: 1 1 340px; min-width: 0">
-<h4 style="margin: 0; font-size: 19px; font-weight: 600">Blade migrations to a new Fabric Interconnect domain</h4>
-<p style="margin: 6px 0 0; color: #c6d5e4">An ongoing project: moving Cisco UCS blades out of the old UCS domain and into a new Fabric Interconnect domain, a batch each week. More than 100 blades migrated so far.</p>
+<h4 style="margin: 0; font-size: 19px; font-weight: 600">Chassis, blade and rack server migrations to a new Fabric Interconnect domain</h4>
+<p style="margin: 6px 0 0; color: #c6d5e4">An ongoing project: moving Cisco UCS chassis, blades and rack servers out of the old UCS domain and into a new Fabric Interconnect domain, a batch each week. More than 100 blades migrated so far.</p>
 </div>
 </article>
 </div>
@@ -541,8 +555,8 @@ html{scroll-behavior:smooth}
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #1f3550;">
 <div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #93a9c1; padding-top: 3px">Build</div>
 <div style="flex: 1 1 340px; min-width: 0">
-<h4 style="margin: 0; font-size: 19px; font-weight: 600">Two Lenovo SR650 V4 servers as additional domain controllers</h4>
-<p style="margin: 6px 0 0; color: #c6d5e4">Started from bare hardware: XCC configuration in XClarity Provisioning Manager, then preparing both machines to join the existing domain as controllers.</p>
+<h4 style="margin: 0; font-size: 19px; font-weight: 600">Domain controllers for a six-server, three-site rollout</h4>
+<p style="margin: 6px 0 0; color: #c6d5e4">Six new Lenovo SR650 V4 servers are being added as domain controllers, two at each of our three data centers. I am building the two at my site on-site and the two at our South Carolina site remotely through XCC, starting from bare hardware: XCC configuration in XClarity Provisioning Manager, then preparing each machine to join the existing domain as a controller. The third site's pair is scheduled for later this month.</p>
 </div>
 </article>
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0;">
@@ -592,8 +606,8 @@ html{scroll-behavior:smooth}
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #1f3550;">
 <div style="flex: 0 0 130px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 14px; color: #93a9c1; padding-top: 3px">Build</div>
 <div style="flex: 1 1 340px; min-width: 0">
-<h4 style="margin: 0; font-size: 19px; font-weight: 600">Installed 30 Lenovo servers at a second data center</h4>
-<p style="margin: 6px 0 0; color: #c6d5e4">Travelled on-site to rack and install a 30-server delivery.</p>
+<h4 style="margin: 0; font-size: 19px; font-weight: 600">Installed 30+ Lenovo servers at a second data center</h4>
+<p style="margin: 6px 0 0; color: #c6d5e4">Travelled on-site to rack and install a delivery of more than 30 servers.</p>
 </div>
 </article>
 <article style="display: flex; flex-wrap: wrap; gap: 6px 28px; padding: 20px 0; border-bottom: 1px solid #1f3550;">
@@ -646,7 +660,7 @@ html{scroll-behavior:smooth}
 <div style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px">
 <div style="border: 1px solid #1f3550; padding: 22px 24px">
 <h3 style="margin: 0 0 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: #f7b84b">Infrastructure operations</h3>
-<p style="margin: 0; color: #c6d5e4">Weekly blade migrations to a new Fabric Interconnect domain, hardware refresh and end-of-life retirement, fault diagnosis, and a written record of every change.</p>
+<p style="margin: 0; color: #c6d5e4">Weekly chassis, blade and rack server migrations to a new Fabric Interconnect domain, hardware refresh and end-of-life retirement, fault diagnosis, and a written record of every change.</p>
 <p style="margin: 12px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #93a9c1">Where: On the job</p>
 </div>
 <div style="border: 1px solid #1f3550; padding: 22px 24px">
@@ -656,7 +670,7 @@ html{scroll-behavior:smooth}
 </div>
 <div style="border: 1px solid #1f3550; padding: 22px 24px">
 <h3 style="margin: 0 0 10px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; color: #f7b84b">Networking</h3>
-<p style="margin: 0; color: #c6d5e4">Switch port mapping and structured copper and fiber cabling, IP address management in Infoblox, and troubleshooting DNS and duplicate-IP faults in a Palo Alto and F5 environment.</p>
+<p style="margin: 0; color: #c6d5e4">Switch port mapping and structured copper and fiber cabling, IP address management in Infoblox, and troubleshooting DNS and duplicate-IP faults in an enterprise environment with firewalls and load balancers.</p>
 <p style="margin: 12px 0 0; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; color: #93a9c1">Where: On the job · CCNA</p>
 </div>
 <div style="border: 1px solid #1f3550; padding: 22px 24px">
@@ -834,7 +848,7 @@ html{scroll-behavior:smooth}
       whoami: function () { return 'Gideon Jose. Data Center Technician running production infrastructure across three data center sites. B.S. IT, Data Networking and Security, Liberty University, spring 2028.'; },
       focus: function () { return 'Cybersecurity · Information Security · Infrastructure Operations · Networking'; },
       certs: function () { return 'CompTIA Security+ SY0-701 (earned Sep 2024)\nCisco CCNA 200-301 (earned Jan 2026)\nCompTIA CySA+ (planned September 2027)'; },
-      numbers: function () { return '700+ hardware units retired\n100+ blades migrated to a new Fabric Interconnect domain\n3 data center sites in Virginia and South Carolina\n30 servers installed in a single delivery'; },
+      numbers: function () { return '700+ hardware units retired\n100+ blades, plus chassis and rack servers, migrated to a new Fabric Interconnect domain\n3 data center sites in Virginia and South Carolina\n30+ servers installed in a single delivery'; },
       worklog: function () {
         var items = document.querySelectorAll('#log h4');
         var lines = [];
@@ -868,6 +882,55 @@ html{scroll-behavior:smooth}
         navigator.clipboard.writeText(EMAIL).then(done, function () { copy.textContent = EMAIL; });
       } else { copy.textContent = EMAIL; }
     });
+  }
+})();
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var el = document.getElementById('gj-type');
+  if (el) {
+    var lines = [
+      'migrated chassis, blades and rack servers to a new FI domain',
+      'retired 700+ end-of-life hardware units',
+      'traced a duplicate IP from IPAM to the switch port',
+      'rolled out drive encryption across the Lenovo fleet',
+      'building domain controllers for a six-server, three-site rollout',
+      'verified gideonjose.com against domain takeover'
+    ];
+    var i = 0;
+    if (reduce) {
+      setInterval(function () { i = (i + 1) % lines.length; el.textContent = lines[i]; }, 4000);
+    } else {
+      var pos = lines[0].length, deleting = true;
+      setTimeout(function step() {
+        var t = lines[i];
+        if (deleting) {
+          pos--; el.textContent = t.slice(0, pos);
+          if (pos <= 0) { deleting = false; i = (i + 1) % lines.length; return setTimeout(step, 300); }
+          return setTimeout(step, 18);
+        }
+        t = lines[i]; pos++; el.textContent = t.slice(0, pos);
+        if (pos >= t.length) { deleting = true; return setTimeout(step, 2600); }
+        setTimeout(step, 38);
+      }, 3200);
+    }
+  }
+  var nums = document.querySelectorAll('[data-count]');
+  if (nums.length && !reduce && 'IntersectionObserver' in window) {
+    var run = function (n) {
+      var target = parseInt(n.getAttribute('data-count'), 10), suf = n.getAttribute('data-suffix') || '';
+      var start = null;
+      function f(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / 1400, 1), e = 1 - Math.pow(1 - p, 3);
+        n.textContent = Math.round(target * e) + suf;
+        if (p < 1) requestAnimationFrame(f);
+      }
+      requestAnimationFrame(f);
+    };
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (x) { if (x.isIntersecting) { run(x.target); io.unobserve(x.target); } });
+    }, { threshold: 0.6 });
+    for (var k = 0; k < nums.length; k++) io.observe(nums[k]);
   }
 })();
 
